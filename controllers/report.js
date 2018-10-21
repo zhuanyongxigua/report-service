@@ -17,6 +17,9 @@ export const login = function(req, res, next) {
 export const report = function(req, res, next) {
     try {
         console.log(req);
+        res.json({
+            verify: true
+        })
     } catch(err) {
         next(err);
     }

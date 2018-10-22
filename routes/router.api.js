@@ -12,6 +12,7 @@ import * as user from '../controllers/user';
 import * as dictionary from '../controllers/dictionary';
 import * as reply from '../controllers/reply';
 import * as report from '../controllers/report';
+import * as project from '../controllers/project';
 const router = express.Router();
 const config = require('../config');
 
@@ -25,6 +26,8 @@ const opts = {
 router.get('/', (req, res, next) => {})
     .post('/login', report.login)
     .get('/report', report.report)
+    .post('/addProject', project.addProject)
+    .post('/getProjectList', project.getProjectList)
     .post('/getRoleType', dictionary.getRoleType)
     .post('/addRoleType', dictionary.addRoleType)
     .post('/getScoreList', user.getScoreList)

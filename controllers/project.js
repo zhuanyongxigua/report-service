@@ -4,19 +4,19 @@ import ProjectModel from '../models/project';
 import * as db from '../data/db';
 import uniqid from 'uniqid';
 
-export const addProject = function(req, res, next) {
+export const addProject = async function(req, res, next) {
     try {
         let oProject = new ProjectModel();
         async function getUniqid() {
             let sUniqid = uniqid();
             let oUserModel = await db.find(ProjectModel)({projectId: sUniqid})({});
-            if (oUserModel) {
+            if (oUserModel.length) {
                 return getUniqid();
             } else {
                 return sUniqid;
             }
         }
-        oProject.projectId = getUniqid();
+        oProject.projectId = await getUniqid();
         oProject.projectName = req.body.projectName;
         oProject.isDel = false;
         oProject.save((err, doc) => {
@@ -43,7 +43,7 @@ export const getProjectList = async function(req, res, next) {
         });
 
         let aProjectModel = await db.find(ProjectModel)({
-            projectName: new RegExp(req.body.param.topicVo.queryStr, "i"),
+            projectName: new RegExp(req.body.param.projectVo.projectName, "i"),
         })(options);
 
         let aProjects = [...aProjectModel];

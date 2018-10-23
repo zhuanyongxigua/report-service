@@ -26,6 +26,7 @@ const opts = {
 router.get('/', (req, res, next) => {})
     .post('/login', report.login)
     .get('/report', report.report)
+    .post('/getReport', report.getReport)
     .post('/addProject', project.addProject)
     .post('/getProjectList', project.getProjectList)
     .post('/getRoleType', dictionary.getRoleType)

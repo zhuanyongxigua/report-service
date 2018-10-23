@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
-var findOrCreate = require('mongoose-findorcreate');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+let findOrCreate = require('mongoose-findorcreate');
+let Schema = mongoose.Schema;
 
-var bountyUser = new Schema({
+let bountyUser = new Schema({
     reward: Number,
     githubId: String
 })
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
     githubId: String,
     OauthId: String,
     OauthToken: String,
@@ -20,6 +20,6 @@ var UserSchema = new Schema({
 
 UserSchema.plugin(findOrCreate);
 
-var UserModel = mongoose.model('User', UserSchema);
+let UserModel = mongoose.model('User', UserSchema);
 
 export default UserModel;

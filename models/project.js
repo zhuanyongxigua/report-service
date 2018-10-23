@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+let Schema = mongoose.Schema;
 
 
-var ProjectSchema = new Schema({
+let ProjectSchema = new Schema({
     projectId: String,
     projectName: String,
     isDel: Boolean,
 });
 
-var ProjectModel = mongoose.model('Project', ProjectSchema);
+let ProjectModel = mongoose.model('Project', ProjectSchema);
 
 export default ProjectModel;

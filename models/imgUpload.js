@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+let Schema = mongoose.Schema;
 
-var imgSchema = new Schema({
+let imgSchema = new Schema({
     img: { data: Buffer, contentType: String },
     isDel: Boolean
 });
 
-var imagesModel = mongoose.model('Image', imgSchema);
+let imagesModel = mongoose.model('Image', imgSchema);
 
 export default imagesModel;

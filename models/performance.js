@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
-let ErrorSchema = new Schema({
+let PerformanceSchema = new Schema({
     loadPage: Number,
     domReady: Number,
     networkTime: Number,
@@ -13,6 +13,6 @@ let ErrorSchema = new Schema({
     timestamps: true
 });
 
-let ErrorModel = mongoose.model('Error', ErrorSchema);
+let PerformanceModel = mongoose.model('Performance', PerformanceSchema);
 
-export default ErrorModel;
+export default PerformanceModel;

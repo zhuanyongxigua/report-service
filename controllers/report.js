@@ -39,9 +39,9 @@ export const postPerformance = async function(req, res, next) {
         // 如果这个项目没有注册，就不需要存了
         let oProject = await db.find(ProjectModel)({projectId: req.query.id})({});
         if (!oProject.length) return;
-        Object.keys(req.query).forEach(key => oError[key] = req.query[key]);
-        oError.isDel = false;
-        oError.save((err, doc) => {
+        Object.keys(req.query).forEach(key => oPerformance[key] = req.query[key]);
+        oPerformance.isDel = false;
+        oPerformance.save((err, doc) => {
             res.json({
                 success: true
             })

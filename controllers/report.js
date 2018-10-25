@@ -37,7 +37,7 @@ export const postPerformance = async function(req, res, next) {
     try {
         let oPerformance = new PerformanceModel();
         // 如果这个项目没有注册，就不需要存了
-        let oProject = await db.find(ProjectModel)({projectId: req.query.id})({});
+        let oProject = await db.find(ProjectModel)({projectId: req.query.projectId})({});
         if (!oProject.length) return;
         Object.keys(req.query).forEach(key => oPerformance[key] = req.query[key]);
         oPerformance.isDel = false;
@@ -65,12 +65,33 @@ export const getReport = async function(req, res, next) {
 
         let aErrorModel = await db.find(ErrorModel)({
             projectId: req.body.param.errorVo.projectId,
-        })({});
+        })(options);
 
         let aErrors = [...aErrorModel];
         aErrors.map(ele => ele._doc.id = ele.id);
 
         res.json({ total: (await fnGetCount), rows: aErrors});
+    } catch(err) {
+        next(err);
+    }
+}
+
+export const getPerformance = async function(req, res, next) {
+    try {
+        let options = {
+            skip: (req.body.currentPage - 1) * req.body.pageSize,
+            limit: req.body.pageSize,
+            sort: '-createAt'
+        }
+        let fnGetCount = new Promise((resolve, reject) => {
+            PerformanceModel.count({projectId: req.body.param.performanceVo.projectId}, (err, c)=> err ? reject(err) : resolve(c));
+        });
+        let aPerformanceModel = await db.find(PerformanceModel)({
+            projectId: req.body.param.performanceVo.projectId,
+        })(options);
+        let aPerformance = [...aPerformanceModel];
+        aPerformance.map(ele => ele._doc.id = ele.id);
+        res.json({ total: (await fnGetCount), rows: aPerformance});
     } catch(err) {
         next(err);
     }
